@@ -18,7 +18,6 @@ export default function App() {
     <View style={styles.itemContainer}>
       <Text style={styles.itemText}>{item.type}</Text>
       <Pressable style={styles.button} onPress={() => toggleSelect(item.type)}><Text style={styles.buttonText}>{isSelected.includes(item.type) ? 'DESELECT' : 'SELECT'}</Text></Pressable>
-
     </View>
   );
 
@@ -41,45 +40,41 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="auto" />
 
-      <ScrollView>
+      <View style={styles.listContainer}>
         <ImageBackground source={{ uri: 'https://images.unsplash.com/photo-1714181871329-1392197011c2?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z3ltJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D' }}>
-          <View>
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>FlatList - Workouts</Text>
-            </View>
-            <FlatList
-              data={workouts}
-              renderItem={renderWorkoutItem}
-              keyExtractor={(item) => item.id}
-              style={styles.list}
-              scrollEnabled={false}
-            />
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>FlatList - Workouts</Text>
           </View>
-
+          <FlatList
+            data={workouts}
+            renderItem={renderWorkoutItem}
+            keyExtractor={(item) => item.id}
+            style={styles.list}
+          />
         </ImageBackground>
-        <View>
-          <ImageBackground source={{ uri: 'https://i.pinimg.com/736x/47/84/dd/4784ddf5883a372d8b8341b3ba149141.jpg' }}>
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>SectionList - Fruits & Vegetables</Text>
-            </View>
-            <SectionList
-              sections={fruits_vegetables}
-              renderItem={renderFruitsVegetablesItem}
-              renderSectionHeader={renderFruitsVegetablesHeader}
-              keyExtractor={(item, index) => item + index}
-              style={styles.list}
-              scrollEnabled={false}
-            />
-          </ImageBackground>
 
-        </View>
-        <View style={styles.selectMenu}>
-          <Text style={styles.selectMenuTitle}>SELECTED EXERCISES</Text>
-          <Text style={styles.selectMenuContent}>
-            {isSelected.length > 0 ? isSelected.join(', ') : ''}
-          </Text>
-        </View>
-      </ScrollView>
+      </View>
+      <View style={styles.listContainer}>
+        <ImageBackground source={{ uri: 'https://i.pinimg.com/736x/47/84/dd/4784ddf5883a372d8b8341b3ba149141.jpg' }}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>SectionList - Fruits & Vegetables</Text>
+          </View>
+          <SectionList
+            sections={fruits_vegetables}
+            renderItem={renderFruitsVegetablesItem}
+            renderSectionHeader={renderFruitsVegetablesHeader}
+            keyExtractor={(item, index) => item + index}
+            style={styles.list}
+          />
+        </ImageBackground>
+
+      </View>
+      <View style={styles.selectMenu}>
+        <Text style={styles.selectMenuTitle}>SELECTED EXERCISES</Text>
+        <Text style={styles.selectMenuContent}>
+          {isSelected.length > 0 ? isSelected.join(', ') : ''}
+        </Text>
+      </View>
     </View>
   );
 }
@@ -103,6 +98,9 @@ const styles = StyleSheet.create({
   },
   list: {
     marginVertical: 10,
+  },
+  listContainer: {
+    flex: 1,
   },
   itemContainer: {
     backgroundColor: 'white',
