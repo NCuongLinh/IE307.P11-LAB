@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, Image, StyleSheet, Text, View, Switch, TextInput, Button, useColorScheme } from 'react-native';
+import { ScrollView, Image, StyleSheet, Text, View, Switch, TextInput, Button, Alert } from 'react-native';
 import { useState } from 'react';
 
 // Nguyễn Cương Lĩnh 22520767
@@ -9,6 +9,9 @@ export default function App() {
 
   const [darkModeIsEnabled, setDarkModeIsEnabled] = useState(false);
   const [notificationIsEnabled, setNotificationIsEnabled] = useState(false);
+  const [feedback, setFeedback] = useState('');
+  const [submittedFeedback, setSubmittedFeedback] = useState('');
+  const [feedbackList, setFeedbackList] = useState([]); 
 
   const SwitchButton = (props) => {
     return (
@@ -23,12 +26,29 @@ export default function App() {
     )
   }
 
+  const showAlert = () => {
+     notificationIsEnabled && Alert.alert(
+      'Thank you for your feedback!',
+      '',
+      [
+        {
+          text: 'OK',
+          style: 'cancel',
+        },
+      ],
+    );
+    setSubmittedFeedback(feedback);
+    setFeedbackList([...feedbackList, feedback]); 
+    setFeedback('');
+    
+  }
+
   return (
-    <View style={ darkModeIsEnabled == true ? styles.containerDark : styles.container}>
+    <ScrollView style={darkModeIsEnabled == true ? styles.containerDark : styles.container}>
       <StatusBar backgroundColor="white" />
       <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={{ uri: 'https://www.scorchsoft.com/public/capabilities/head/react-native-logo-square.webp' }} />
-        <Text style={ darkModeIsEnabled == true ? styles.logoTitleDark : styles.logoTitle}>React Native App</Text>
+        <Image style={styles.logo} source={darkModeIsEnabled == true ? require('./assets/logo/logo_dark.png') : require('./assets/logo/logo.png')} />
+        <Text style={darkModeIsEnabled == true ? styles.logoTitleDark : styles.logoTitle}>React Native App</Text>
       </View>
 
       <SwitchButton
@@ -43,21 +63,25 @@ export default function App() {
         toggleSwitch={() => setNotificationIsEnabled(prev => !prev)}
       />
       <View style={styles.feedbackContainer}>
-        <Text style={ darkModeIsEnabled == true ? styles.feedbackTitleDark : styles.feedbackTitle}>
+        <Text style={darkModeIsEnabled == true ? styles.feedbackTitleDark : styles.feedbackTitle}>
           FeedBack
         </Text>
-        <TextInput style={ darkModeIsEnabled == true ? styles.inputDark  : styles.input} placeholderTextColor={darkModeIsEnabled ? 'white' : 'black'} placeholder='Your feedback here...'/>
-        <Button title="SEND FEEDBACK" />
-
+        <TextInput
+          style={darkModeIsEnabled == true ? styles.inputDark : styles.input}
+          placeholderTextColor={darkModeIsEnabled ? 'white' : 'black'}g
+          placeholder='Your feedback here...'
+          value={feedback}
+          onChangeText={setFeedback}
+        />
+        <Button title="SEND FEEDBACK"  onPress={() => feedback !== '' && showAlert()} />
+        <Text style={darkModeIsEnabled == true ? styles.faqTitleDark : styles.faqTitle}>Frequently Asked Questions</Text>
         <View>
-          <Text style={ darkModeIsEnabled == true ? styles.faqTitleDark : styles.faqTitle}> Frequently Asked Questions</Text>
+        {feedbackList.map((item, index) => (
+            <Text key={index} style={darkModeIsEnabled ? styles.faqDark : styles.faq}>Q: {item}</Text>
+          ))}
         </View>
       </View>
-
-
-
-
-    </View>
+    </ScrollView>
 
   );
 }
@@ -73,7 +97,6 @@ const styles = StyleSheet.create({
   containerDark: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'black',
     marginTop: 40,
     backgroundColor: 'black',
   },
@@ -86,7 +109,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 150,
     height: 150,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     borderRadius: 150 / 2,
     alignContent: 'center',
     justifyContent: 'center'
@@ -164,18 +187,28 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     fontSize: 18,
-    placeholder: 'white'
+    backgroundColor: '#2F2F2F',
+    color: 'white',
+
 
   },
   faqTitle: {
     fontSize: 25,
     fontWeight: 'bold',
-    marginTop: 20,
+    marginVertical: 10,
   },
   faqTitleDark: {
     fontSize: 25,
     fontWeight: 'bold',
-    marginTop: 20,
+    marginVertical: 10,
+    color: 'white'
+  },
+  faq:{
+    marginBottom: 10,
+    color: 'black'
+  },
+  faqDark:{
+    marginBottom: 10,
     color: 'white'
   }
 });
