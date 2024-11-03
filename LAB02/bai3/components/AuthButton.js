@@ -4,8 +4,8 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 
 //22520767 Nguyễn Cương Lĩnh
 
-const AuthButton = ({ title }) => (
-    <Pressable style={styles.button}>
+const AuthButton = ({ title, onPress }) => (
+    <Pressable style={styles.button} onPress={onPress}>
         <Text style={styles.buttonText}>
             {title}
         </Text>

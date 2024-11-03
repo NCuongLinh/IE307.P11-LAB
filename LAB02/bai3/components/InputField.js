@@ -18,17 +18,17 @@ const Symbol = ({ symbol }) => {
         return <FontAwesome6 name="user" size={33} color="black" />
     }
     if (symbol === "password") {
-        return <Feather name="lock" size={33} color="black" />
+        return <Feather name="lock" size={33} color ="black" />
     }
 
     return null;
 
 };
 
-const InputField = ({ symbol, placeholder, secure = false }) => (
+const InputField = ({ symbol, placeholder, secure = false, onChangeText  }) => (
         <View style={styles.container}>
             <Symbol symbol={symbol}/>
-            <TextInput style={styles.inputField} placeholder={placeholder} secureTextEntry={secure}/>
+            <TextInput style={styles.inputField} placeholder={placeholder} secureTextEntry={secure} onChangeText={onChangeText}/>
 
 
         </View>
