@@ -2,12 +2,12 @@ import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, } from 'react-native';
 
 
-const HomeScreen = ({ navigation }) => {
+const NotificationScreen = ({ navigation }) => {
     return (
         <View style={styles.body}>
             <View style={styles.container}>
-                <Text style={styles.title}>Home Screen</Text>
-                <TouchableOpacity style={styles.logoutButton} onPress={() => navigation.navigate('HomeDetailsScreen')}>
+                <Text style={styles.title}>Notification Screen</Text>
+                <TouchableOpacity style={styles.logoutButton} onPress={() => navigation.navigate('NotificationDetailsScreen')}>
                     <Text style={styles.logoutButtonText}>
                         GO TO DETAILS
                     </Text>
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
     
 
 });
-export default HomeScreen
+export default NotificationScreen

@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
-import { View, Text, Button } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FavouriteScreen from './FavouritesScreen';
-import CategoryScreen from './CategoriesScreen';
 import ProfileScreen from './ProfileScreen';
-import HomeScreen from './HomeScreen';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Octicons from '@expo/vector-icons/Octicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import HomeDrawer from '../navigation/HomeDrawer'
+import CategoriesTop from '../navigation/CategoriesTop'
+
 
 const Tab = createBottomTabNavigator();
 
@@ -19,19 +19,19 @@ const MainScreen = () => {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false, tabBarInactiveTintColor: 'black'}} >
       <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="HomeDrawer"
+        component={HomeDrawer}
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesome5 name="home" size={size} color={color} />
           ),
           title: 'Home', 
-          headerShown: true,
         }}
       />
+      
       <Tab.Screen
-        name="Categories"
-        component={CategoryScreen}
+        name="CategoriesTop"
+        component={CategoriesTop}
         options={{
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="appstore1" size={size} color={color} />

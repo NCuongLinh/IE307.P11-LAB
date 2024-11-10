@@ -2,16 +2,12 @@ import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, } from 'react-native';
 
 
-const HomeScreen = ({ navigation }) => {
+const HomeDetailsScreen = () => {
     return (
         <View style={styles.body}>
             <View style={styles.container}>
                 <Text style={styles.title}>Home Screen</Text>
-                <TouchableOpacity style={styles.logoutButton} onPress={() => navigation.navigate('HomeDetailsScreen')}>
-                    <Text style={styles.logoutButtonText}>
-                        GO TO DETAILS
-                    </Text>
-                </TouchableOpacity>
+
             </View>
         </View>
     )
@@ -32,21 +28,7 @@ const styles = StyleSheet.create({
     title:{
         textAlign:'center'
     },
-    logoutButton: {
-        marginTop: 10,
-        backgroundColor: '#24A0ED',
-        height: 40,
-        width: 120,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'center'
-
-    },
-    logoutButtonText: {
-        color: 'white',
-
-    }
     
 
 });
-export default HomeScreen
+export default HomeDetailsScreen

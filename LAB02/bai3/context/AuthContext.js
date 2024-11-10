@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({ email: '', password: '' });
 
-  const validEmail = 'user';
+  const validEmail = '22520767@gm.uit.edu.vn';
   const validPassword = 'password';
 
   const login = (email, password) => {

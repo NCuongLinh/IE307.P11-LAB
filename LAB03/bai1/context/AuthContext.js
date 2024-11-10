@@ -5,8 +5,8 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({ email: '', password: '' });
 
-  const validEmail = 'user';
-  const validPassword = 'password';
+  const validEmail = '';
+  const validPassword = '';
 
   const login = (email, password) => {
     if (email === validEmail && password === validPassword) {

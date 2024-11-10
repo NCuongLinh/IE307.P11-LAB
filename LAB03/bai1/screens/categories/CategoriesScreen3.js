@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 
-const CategoryScreen = () => {
+const CategoriesScreen3 = () => {
     return (
         <View style={styles.body}>
 
             <View style={styles.container}>
-                <Text style={styles.title}>Categories Screen</Text>
+                <Text style={styles.title}>Categories3 </Text>
             </View>
         </View>
     )
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 });
-export default CategoryScreen
+export default CategoriesScreen3
