@@ -1,21 +1,24 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
-import { useRoute, useNavigation } from '@react-navigation/native';
-import { updateNote } from '../database/notesService';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, TextInput, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { addNote } from '../database/notesService';
 import Octicons from '@expo/vector-icons/Octicons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { SettingsContext } from '../context/SettingsContext';
 
-export default function EditNoteScreen() {
-  const route = useRoute();
-  const navigation = useNavigation();
-  const { id, currentTitle, currentContent } = route.params;
-  const { isDarkMode } = useContext(SettingsContext);
-  const [title, setTitle] = useState(currentTitle);
-  const [content, setContent] = useState(currentContent);
+const AddNoteScreen = ({ navigation, route }) => {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
-  const handleUpdateNote = () => {
-    updateNote(id, title, content, () => {
+  const { isDarkMode } = useContext(SettingsContext);
+
+  const handleAddNote = () => {
+    if (!title) {
+      Alert.alert('Warning', 'Please enter a title!');
+      return;
+    }
+    addNote(title, content, () => {
+      setTitle('');
+      setContent('');
       navigation.goBack();
     });
   };
@@ -29,10 +32,9 @@ export default function EditNoteScreen() {
     });
   }, [isDarkMode]);
 
-
   return (
     <View style={[styles.body, { backgroundColor: isDarkMode ? '#111111' : '#F2F4F7' }]}>
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: isDarkMode ? '#111111' : '#F2F4F7' }]}>
         <TextInput
           placeholder="Enter your title"
           placeholderTextColor={isDarkMode ? '#BBBBBB' : '#727272'}
@@ -49,7 +51,7 @@ export default function EditNoteScreen() {
           multiline={true}
         />
         <View style={styles.buttonGroup}>
-          <TouchableOpacity onPress={handleUpdateNote}>
+          <TouchableOpacity onPress={handleAddNote}>
             <Ionicons name="checkmark-circle" size={50} color="green" />
           </TouchableOpacity>
           <TouchableOpacity onPress={navigation.goBack}>
@@ -59,8 +61,7 @@ export default function EditNoteScreen() {
       </View>
     </View>
   );
-}
-
+};
 const styles = StyleSheet.create({
   body: {
     flex: 1,
@@ -69,6 +70,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
   noteTitle: {
     height: 50,
     borderColor: '#727272',
@@ -76,7 +83,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
     fontSize: 20,
-    borderRadius: 5,
   },
   noteText: {
     height: 100,
@@ -85,12 +91,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
     fontSize: 20,
-    borderRadius: 5,
   },
   buttonGroup: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     paddingLeft: 20,
+
   }
 });
+
+export default AddNoteScreen;

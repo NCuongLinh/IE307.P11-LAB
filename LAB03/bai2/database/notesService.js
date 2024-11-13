@@ -2,7 +2,6 @@ import * as SQLite from 'expo-sqlite/legacy';
 
 const db = SQLite.openDatabase('notes.db');
 
-// Hàm để tạo bảng nếu chưa có
 export const createTable = () => {
   db.transaction((tx) => {
     tx.executeSql(
@@ -14,6 +13,8 @@ export const createTable = () => {
   });
 };
 
+// CRUD
+
 export const addNote = (title, content, callback) => {
   db.transaction((tx) => {
     tx.executeSql(
@@ -21,7 +22,7 @@ export const addNote = (title, content, callback) => {
       [title, content],
       (_, result) => {
         console.log('Note added', result);
-        if (callback) callback(result);
+        if (callback) callback();
       },
       (tx, error) => console.log('Error inserting note', error)
     );
@@ -49,9 +50,23 @@ export const updateNote = (id, title, content, callback) => {
       [title, content, id],
       (_, result) => {
         console.log('Note updated', result);
-        if (callback) callback(result);
+        if (callback) callback();
       },
       (tx, error) => console.log('Error updating note', error)
+    );
+  });
+};
+
+export const deleteNote = (id, callback) => {
+  db.transaction((tx) => {
+    tx.executeSql(
+      'DELETE FROM notes WHERE id = ?;',
+      [id],
+      (_, result) => {
+        console.log('Note deleted', result);
+        if (callback) callback(result);
+      },
+      (tx, error) => console.log('Error deleting note', error)
     );
   });
 };

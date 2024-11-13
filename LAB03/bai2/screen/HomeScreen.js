@@ -1,30 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, FlatList, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { createTable, addNote, getNotes } from '../database/notesService';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, FlatList, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { createTable, getNotes, deleteNote } from '../database/notesService';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import EvilIcons from '@expo/vector-icons/EvilIcons';
+import { SettingsContext } from '../context/SettingsContext';
 
-const HomeScreen = ({navigation}) => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+const HomeScreen = ({ navigation }) => {
+  const { isDarkMode } = useContext(SettingsContext);
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    // Tạo bảng khi component được mount
     createTable();
-    // Lấy ghi chú ban đầu
     loadNotes();
-  }, []);
+
+    const unsubscribe = navigation.addListener('focus', () => {
+      loadNotes();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   const loadNotes = () => {
     getNotes((fetchedNotes) => {
       setNotes(fetchedNotes);
-    });
-  };
-
-  const handleAddNote = () => {
-    addNote(title, content, () => {
-      setTitle('');
-      setContent('');
-      loadNotes(); // Tải lại ghi chú sau khi thêm mới
     });
   };
 
@@ -36,77 +34,106 @@ const HomeScreen = ({navigation}) => {
     });
   };
 
+  const handleDeleteNote = (id) => {
+    deleteNote(id, () => {
+      setNotes((prevNotes) => prevNotes.filter(note => note.id !== id));
+    });
+  }
 
   return (
-    <View style={styles.body}>
-          <View style={styles.container}>
-      <Text style={styles.title}>Note App</Text>
-      <TextInput
-        placeholder="Title"
-        value={title}
-        onChangeText={setTitle}
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10 }}
-      />
-      <TextInput
-        placeholder="Content"
-        value={content}
-        onChangeText={setContent}
-        style={{ height: 80, borderColor: 'gray', borderWidth: 1, marginBottom: 10 }}
-      />
-      <Button title="Add Note" onPress={handleAddNote} />
-
-      <FlatList
-        data={notes}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleEditNote(item)}>
-            <View style={{ marginVertical: 10 }}>
-              <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
-              <Text>{item.content}</Text>
-            </View>
+    <View style={[styles.body, { backgroundColor: isDarkMode ? '#111111' : '#F2F4F7' }]}>
+      <StatusBar />
+      <View style={styles.container}>
+        <Text style={[styles.title, { color: isDarkMode ? '#0097FA' : 'red' }]}>Note App</Text>
+        <View style={styles.addContainer}>
+          <Text style={[styles.subtitle, { color: isDarkMode ? '#FFF' : '#727272' }]}>All Notes</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('AddNote')}>
+            <AntDesign name="pluscircle" size={48} color={isDarkMode ? '#0097FA' : 'red'} />
           </TouchableOpacity>
-        )}
-      />
+        </View>
+
+        <FlatList
+          data={notes}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={[
+              styles.noteContainer,
+            { borderColor: isDarkMode ? '#FFF' : '#727272' },
+            { backgroundColor: isDarkMode ? 'black' : '#F2F4F7' },
+            ]}>
+              <TouchableOpacity onPress={() => handleEditNote(item)}>
+                <View style={styles.noteTextContainer}>
+                  <Text style={[styles.noteTitle, { color: isDarkMode ? 'white' : '#727272' }]}>{item.title}</Text>
+                  <Text style={[styles.noteText, { color: isDarkMode ? 'white' : '#727272' }]}>{item.content}</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleDeleteNote(item.id)}>
+                <EvilIcons name="trash" size={45} color={isDarkMode ? 'white' : 'black'} />
+              </TouchableOpacity>
+            </View>
+          )}
+        />
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   body: {
-      backgroundColor: '#F2F4F7',
-      flex: 1,
-
+    flex: 1,
   },
   container: {
-      flex: 1,
-      flexDirection: 'column',
-      backgroundColor: '#F2F4F7',
-      justifyContent: 'center',
-      marginHorizontal: 30,
-      marginTop:10
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginHorizontal: 15,
+    marginTop: 30,
   },
-  title:{
-      textAlign:'center',
-      fontSize: 25,
-      color: 'red',
-      fontWeight:'bold'
+  title: {
+    textAlign: 'center',
+    fontSize: 35,
+    marginTop: 10,
+    color: 'red',
+    fontWeight: 'bold',
   },
-  logoutButton: {
-      marginTop: 10,
-      backgroundColor: '#24A0ED',
-      height: 40,
-      width: 120,
-      justifyContent: 'center',
-      alignItems: 'center',
-      alignSelf: 'center'
+  addContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 20,
+    paddingHorizontal: 10,
+  },
+  subtitle: {
+    fontSize: 25,
+    color: '#727272',
+    fontWeight: 'bold',
+  },
 
+  noteContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 15,
+    borderColor: '#727272',
+    borderWidth: 1,
+    padding: 15,
+    borderRadius: 5,
+    shadowColor: 'black'
   },
-  logoutButtonText: {
-      color: 'white',
-
+  noteTextContainer: {
+    maxWidth: 300
+  },
+  noteTitle: {
+    fontSize: 25,
+    color: '#727272',
+    fontWeight: 'bold',
+  },
+  noteText: {
+    marginTop: 5,
+    fontSize: 22,
+    color: '#727272',
   }
-  
 
 });
-export default HomeScreen
+
+export default HomeScreen;
