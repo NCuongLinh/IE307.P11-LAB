@@ -17,6 +17,10 @@ export default function EditNoteScreen() {
   const [content, setContent] = useState(currentContent);
 
   const handleUpdateNote = () => {
+    if (!title) {
+      Alert.alert('Warning', 'Please enter a title!');
+      return;
+    }
     updateNote(id, title, content, () => {
       navigation.goBack();
     });
