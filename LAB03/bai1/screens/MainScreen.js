@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FavouriteScreen from './FavouritesScreen';
 import ProfileScreen from './ProfileScreen';
@@ -10,14 +9,12 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import HomeDrawer from '../navigation/HomeDrawer'
 import CategoriesTop from '../navigation/CategoriesTop'
 
-
 const Tab = createBottomTabNavigator();
 
 const MainScreen = () => {
-  const { userInfo } = useContext(AuthContext);
 
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false, tabBarInactiveTintColor: 'black'}} >
+    <Tab.Navigator screenOptions={{ headerShown: false, tabBarInactiveTintColor: 'black' }} >
       <Tab.Screen
         name="HomeDrawer"
         component={HomeDrawer}
@@ -25,19 +22,19 @@ const MainScreen = () => {
           tabBarIcon: ({ color, size }) => (
             <FontAwesome5 name="home" size={size} color={color} />
           ),
-          title: 'Home', 
+          title: 'Home',
         }}
       />
-      
+
       <Tab.Screen
         name="CategoriesTop"
         component={CategoriesTop}
         options={{
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="appstore1" size={size} color={color} />
-            ),
-            title: 'Categories', 
-            headerShown: true,
+          ),
+          title: 'Categories',
+          headerShown: true,
         }}
       />
       <Tab.Screen
@@ -46,10 +43,10 @@ const MainScreen = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <Octicons name="heart-fill" size={size} color={color} />
-            ),
-            tabBarBadge:3,
-            title: 'Favourites', 
-            headerShown: true,
+          ),
+          tabBarBadge: 3,
+          title: 'Favourites',
+          headerShown: true,
         }}
       />
       <Tab.Screen
@@ -58,9 +55,9 @@ const MainScreen = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="user" size={size} color={color} />
-            ),
-            title: 'Profile', 
-            headerShown: true,
+          ),
+          title: 'Profile',
+          headerShown: true,
         }}
       />
     </Tab.Navigator>

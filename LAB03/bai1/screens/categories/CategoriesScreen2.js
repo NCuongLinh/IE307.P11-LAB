@@ -1,10 +1,9 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 const CategoriesScreen2 = () => {
     return (
         <View style={styles.body}>
-
             <View style={styles.container}>
                 <Text style={styles.title}>Categories2 </Text>
             </View>

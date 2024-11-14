@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 
 const NotificationScreen = ({ navigation }) => {

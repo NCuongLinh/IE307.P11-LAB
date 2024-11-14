@@ -6,10 +6,7 @@ import MainScreen from '../screens/MainScreen'
 import HomeDetailsScreen from '../screens/HomeDetailsScreen';
 import NotificationDetailsScreen from '../screens/NotificationDetailsScreen';
 
-
 const Stack = createStackNavigator();
-
-//22520767 Nguyễn Cương Lĩnh
 
 const NavigationStack = () => {
   return (

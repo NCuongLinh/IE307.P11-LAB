@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, } from 'react-native';
-
+import { View, Text, StyleSheet } from 'react-native';
 
 const HelpScreen = () => {
     return (
@@ -12,11 +11,11 @@ const HelpScreen = () => {
         </View>
     )
 }
+
 const styles = StyleSheet.create({
     body: {
         backgroundColor: '#F2F4F7',
         flex: 1,
-
     },
     container: {
         flex: 1,
@@ -25,10 +24,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginHorizontal: 30
     },
-    title:{
-        textAlign:'center'
+    title: {
+        textAlign: 'center'
     },
-    
+
 
 });
 export default HelpScreen

@@ -1,11 +1,11 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 const FavouriteScreen = () => {
     return (
         <View style={styles.body}>
             <View style={styles.container}>
-            <Text style={styles.title}>Favourites Screen</Text>
+                <Text style={styles.title}>Favourites Screen</Text>
             </View>
         </View>
     )
@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginHorizontal: 30
     },
-    title:{
-        textAlign:'center'
+    title: {
+        textAlign: 'center'
     }
 });
 export default FavouriteScreen

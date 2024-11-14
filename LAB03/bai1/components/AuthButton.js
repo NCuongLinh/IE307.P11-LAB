@@ -1,8 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
-
-
-//22520767 Nguyễn Cương Lĩnh
+import { Text, StyleSheet, Pressable } from 'react-native';
 
 const AuthButton = ({ title, onPress }) => (
     <Pressable style={styles.button} onPress={onPress}>

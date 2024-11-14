@@ -1,12 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Feather from '@expo/vector-icons/Feather';
-
-
-
-//22520767 Nguyễn Cương Lĩnh
 
 const Symbol = ({ symbol }) => {
 
@@ -29,8 +25,6 @@ const InputField = ({ symbol, placeholder, secure = false, onChangeText  }) => (
         <View style={styles.container}>
             <Symbol symbol={symbol}/>
             <TextInput style={styles.inputField} placeholder={placeholder} secureTextEntry={secure} onChangeText={onChangeText}/>
-
-
         </View>
 );
 

@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, } from 'react-native';
-
+import { View, Text, StyleSheet } from 'react-native';
 
 const NotificationDetailsScreen = () => {
     return (
@@ -12,6 +11,7 @@ const NotificationDetailsScreen = () => {
         </View>
     )
 }
+
 const styles = StyleSheet.create({
     body: {
         backgroundColor: '#F2F4F7',

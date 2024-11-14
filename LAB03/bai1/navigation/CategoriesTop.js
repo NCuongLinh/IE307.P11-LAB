@@ -3,7 +3,6 @@ import CategoriesScreen1 from '../screens/categories/CategoriesScreen1'
 import CategoriesScreen2 from '../screens/categories/CategoriesScreen2'
 import CategoriesScreen3 from '../screens/categories/CategoriesScreen3'
 
-
 const Tab = createMaterialTopTabNavigator();
 
 function CategoriesTop() {
