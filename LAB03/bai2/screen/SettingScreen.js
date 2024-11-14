@@ -3,6 +3,8 @@ import React, { useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, Switch } from 'react-native';
 import { SettingsContext } from '../context/SettingsContext';
 
+//22520767 Nguyễn Cương Lĩnh
+
 const SettingScreen = ({ navigation }) => {
     const { isDarkMode, toggleDarkMode, fontSize, updateFontSize } = useContext(SettingsContext);
 

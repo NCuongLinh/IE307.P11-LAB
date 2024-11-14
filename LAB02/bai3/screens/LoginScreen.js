@@ -5,7 +5,6 @@ import Logo from '../components/Logo';
 import AuthButton from '../components/AuthButton'
 import { AuthContext } from '../context/AuthContext';
 
-
 //22520767 Nguyễn Cương Lĩnh
 
 const LoginScreen = ({ navigation }) => {

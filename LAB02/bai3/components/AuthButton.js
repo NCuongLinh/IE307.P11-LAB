@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 
-
 //22520767 Nguyễn Cương Lĩnh
 
 const AuthButton = ({ title, onPress }) => (

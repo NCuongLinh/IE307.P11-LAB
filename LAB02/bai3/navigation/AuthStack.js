@@ -3,12 +3,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen'
 import MainScreen from '../screens/MainScreen'
-import ProfileScreen from '../screens/ProfileScreen';
-
-
-const Stack = createStackNavigator();
 
 //22520767 Nguyễn Cương Lĩnh
+
+const Stack = createStackNavigator();
 
 const AuthStack = () => {
   return (

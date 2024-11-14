@@ -1,12 +1,14 @@
 import React, { createContext, useState } from 'react';
 
+//22520767 Nguyễn Cương Lĩnh
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({ email: '', password: '' });
 
-  const validEmail = '';
-  const validPassword = '';
+  const validEmail = '22520767@gm.uit.edu.vn';
+  const validPassword = 'nguyencuonglinh';
 
   const login = (email, password) => {
     if (email === validEmail && password === validPassword) {

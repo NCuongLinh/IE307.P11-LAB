@@ -5,6 +5,8 @@ import Octicons from '@expo/vector-icons/Octicons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { SettingsContext } from '../context/SettingsContext';
 
+//22520767 Nguyễn Cương Lĩnh
+
 const AddNoteScreen = ({ navigation, route }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');

@@ -4,6 +4,8 @@ import InputField from '../components/InputField.js'
 import Logo from '../components/Logo';
 import AuthButton from '../components/AuthButton'
 
+//22520767 Nguyễn Cương Lĩnh
+
 const RegisterScreen = ({ navigation }) => (
     <View style={styles.body}>
         <View style={styles.container}>

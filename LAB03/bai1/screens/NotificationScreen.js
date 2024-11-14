@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
+//22520767 Nguyễn Cương Lĩnh
 
 const NotificationScreen = ({ navigation }) => {
     return (

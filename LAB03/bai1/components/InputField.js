@@ -4,9 +4,9 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Feather from '@expo/vector-icons/Feather';
 
-const Symbol = ({ symbol }) => {
+//22520767 Nguyễn Cương Lĩnh
 
-    
+const Symbol = ({ symbol }) => {
     if (symbol === "mail") {
         return <MaterialCommunityIcons name="email-outline" size={33} color="black" />
     }

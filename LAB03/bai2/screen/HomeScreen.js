@@ -5,6 +5,8 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { SettingsContext } from '../context/SettingsContext';
 
+//22520767 Nguyễn Cương Lĩnh
+
 const HomeScreen = ({ navigation }) => {
   const { isDarkMode } = useContext(SettingsContext);
   const [notes, setNotes] = useState([]);

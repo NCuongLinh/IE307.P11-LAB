@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
+//22520767 Nguyễn Cương Lĩnh
+
 const FeedbackForm = ({ darkMode, feedback, setFeedback, onSubmit }) => (
     <View style={styles.feedbackContainer}>
         <Text style={darkMode ? styles.feedbackTitleDark : styles.feedbackTitle}>Feedback</Text>
@@ -49,7 +51,9 @@ const styles = StyleSheet.create({
         padding: 10,
         fontSize: 18,
         backgroundColor: '#2F2F2F',
-        color: 'white'
+        color: 'white',
+        textAlignVertical: 'top'
+
     },
 });
 

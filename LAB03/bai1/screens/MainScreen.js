@@ -9,6 +9,8 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import HomeDrawer from '../navigation/HomeDrawer'
 import CategoriesTop from '../navigation/CategoriesTop'
 
+//22520767 Nguyễn Cương Lĩnh
+
 const Tab = createBottomTabNavigator();
 
 const MainScreen = () => {

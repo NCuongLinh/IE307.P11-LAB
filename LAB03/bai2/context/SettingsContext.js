@@ -1,8 +1,9 @@
 import React, { createContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const SettingsContext = createContext();
+//22520767 Nguyễn Cương Lĩnh
 
+export const SettingsContext = createContext();
 export const SettingsProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [fontSize, setFontSize] = useState(14);

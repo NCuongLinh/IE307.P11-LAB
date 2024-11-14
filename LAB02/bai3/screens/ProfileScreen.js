@@ -1,7 +1,9 @@
 import React, { useContext } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
+
+//22520767 Nguyễn Cương Lĩnh
 
 const ProfileScreen = () => {
 

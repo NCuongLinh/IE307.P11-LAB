@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
+//22520767 Nguyễn Cương Lĩnh
+
 const FeedbackList = ({ feedbackList, darkMode }) => (
     <View style={styles.feedbackListContainer}>
         <Text style={darkMode ? styles.faqTitleDark : styles.faqTitle}>Frequently Asked Questions</Text>

@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { View, Text, Button } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FavouriteScreen from './FavouritesScreen';
@@ -10,6 +9,8 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Octicons from '@expo/vector-icons/Octicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+
+//22520767 Nguyễn Cương Lĩnh
 
 const Tab = createBottomTabNavigator();
 

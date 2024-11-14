@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, View, Button, Alert } from 'react-native';
+import { ScrollView, StyleSheet, Alert } from 'react-native';
 import { useState } from 'react';
 import Logo from './components/Logo';
 import SwitchButton from './components/SwitchButton';
 import FeedbackForm from './components/FeedbackForm';
 import FeedbackList from './components/FeedbackList';
+
+//22520767 Nguyễn Cương Lĩnh
 
 export default function App() {
   const [darkModeIsEnabled, setDarkModeIsEnabled] = useState(false);

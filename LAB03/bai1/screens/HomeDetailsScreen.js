@@ -1,6 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native';
 
+//22520767 Nguyễn Cương Lĩnh
+
 const HomeDetailsScreen = () => {
     return (
         <View style={styles.body}>

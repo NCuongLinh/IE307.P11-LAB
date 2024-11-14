@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 
+//22520767 Nguyễn Cương Lĩnh
+
 const Logo = ({title}) => (
     <View style={styles.logoContainer}>
         <Image

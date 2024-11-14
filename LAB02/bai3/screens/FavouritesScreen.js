@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+
+//22520767 Nguyễn Cương Lĩnh
 
 const FavouriteScreen = () => {
     return (
