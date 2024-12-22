@@ -24,13 +24,19 @@ const HomeScreen = ({ navigation }) => {
 
     const handleAddToCart = (item) => {
         const isInCart = cart.some(cartItem => cartItem.id === item.id);
-
+    
         if (isInCart) {
             Alert.alert('Message', `This product is already in your cart.`);
             return;
         }
-
-        addToCart({ id: item.id, title: item.title, price: item.price, image: item.image, quantity: 1 });
+    
+        addToCart({
+            id: item.id,
+            title: item.title,
+            price: item.price,
+            image: item.image,
+            quantity: 1
+        });
         Alert.alert('Success', `${item.title} has been added to your cart!`);
     };
 

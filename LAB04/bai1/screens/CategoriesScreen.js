@@ -48,16 +48,21 @@ const CategoryScreen = ({ navigation }) => {
 
   const handleAddToCart = (item) => {
     const isInCart = cart.some(cartItem => cartItem.id === item.id);
-    const isInFirstCart = firstCart.some(cartItem => cartItem.productId === item.id);
 
-    if (isInCart || isInFirstCart) {
-      Alert.alert('Message', `This product is already in your cart.`);
-      return;
+    if (isInCart) {
+        Alert.alert('Message', `This product is already in your cart.`);
+        return;
     }
 
-    addToCart({ id: item.id, title: item.title, price: item.price, image: item.image });
+    addToCart({
+        id: item.id,
+        title: item.title,
+        price: item.price,
+        image: item.image,
+        quantity: 1
+    });
     Alert.alert('Success', `${item.title} has been added to your cart!`);
-  };
+};
 
 
   const renderItem = ({ item }) => (
