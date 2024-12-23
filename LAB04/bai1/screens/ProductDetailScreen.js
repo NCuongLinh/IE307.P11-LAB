@@ -1,13 +1,23 @@
-import React, { useEffect } from 'react';
-import { ScrollView, Text, Image, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, ScrollView, Text, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
 
 const ProductDetailScreen = ({ route, navigation }) => {
     const { product } = route.params;
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         navigation.setOptions({ title: product.title });
+        setLoading(false)
     }, [navigation, product.title]);
+
+        if (loading) {
+            return (
+                <View style={styles.loaderContainer}>
+                    <ActivityIndicator size="large" color="#24A0ED" />
+                </View>
+            );
+        }
 
     return (
         <ScrollView style={styles.container}>

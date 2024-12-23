@@ -9,6 +9,7 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import { useCart } from '../context/CartContext';
 
 //22520767 Nguyễn Cương Lĩnh
 
@@ -16,6 +17,7 @@ const Tab = createBottomTabNavigator();
 
 const MainScreen = () => {
   const { userInfo } = useContext(AuthContext);
+  const { cartItemCount } = useCart();
 
   return (
     <Tab.Navigator screenOptions={{ headerShown: true, tabBarInactiveTintColor: 'black'}} >
@@ -44,7 +46,7 @@ const MainScreen = () => {
           tabBarIcon: ({ color, size }) => (
             <FontAwesome6 name="cart-shopping" size={size} color={color} />
             ),
-            tabBarBadge:3
+            tabBarBadge: cartItemCount > 0 ? cartItemCount : null, 
         }}
       />
       <Tab.Screen

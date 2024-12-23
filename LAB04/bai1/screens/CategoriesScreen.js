@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView, Image, Alert, ActivityIndicator } from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
 import { useCart } from '../context/CartContext'
 
@@ -10,28 +10,31 @@ const CategoryScreen = ({ navigation }) => {
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const { addToCart, cart, firstCart } = useCart();
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Fetch danh sách các categories
-    fetch('https://fakestoreapi.com/products/categories')
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
+    const fetchCategories = fetch('https://fakestoreapi.com/products/categories')
+        .then((res) => res.json())
+        .then((data) => setCategories(data));
 
-    // Fetch tất cả sản phẩm khi load trang
-    fetch('https://fakestoreapi.com/products')
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
+    // Fetch tất cả product 
+    const fetchProducts = fetch('https://fakestoreapi.com/products')
+        .then((res) => res.json())
+        .then((data) => setProducts(data));
+
+        Promise.all([fetchCategories, fetchProducts])
+        .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
-    // Fetch sản phẩm theo category đã chọn
+    // Fetch product theo category đã chọn
     if (selectedCategory !== 'all') {
       fetch(`https://fakestoreapi.com/products/category/${selectedCategory}`)
         .then((res) => res.json())
         .then((data) => setProducts(data));
     } else {
-      // Fetch lại tất cả sản phẩm khi không chọn category
+      // Fetch lại tất cả product khi không chọn category
       fetch('https://fakestoreapi.com/products')
         .then((res) => res.json())
         .then((data) => setProducts(data));
@@ -50,19 +53,19 @@ const CategoryScreen = ({ navigation }) => {
     const isInCart = cart.some(cartItem => cartItem.id === item.id);
 
     if (isInCart) {
-        Alert.alert('Message', `This product is already in your cart.`);
-        return;
+      Alert.alert('Message', `This product is already in your cart.`);
+      return;
     }
 
     addToCart({
-        id: item.id,
-        title: item.title,
-        price: item.price,
-        image: item.image,
-        quantity: 1
+      id: item.id,
+      title: item.title,
+      price: item.price,
+      image: item.image,
+      quantity: 1
     });
     Alert.alert('Success', `${item.title} has been added to your cart!`);
-};
+  };
 
 
   const renderItem = ({ item }) => (
@@ -90,6 +93,14 @@ const CategoryScreen = ({ navigation }) => {
       </View>
     </View>
   )
+
+  if (loading) {
+    return (
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator size="large" color="#24A0ED" />
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={styles.body}>

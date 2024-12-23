@@ -1,35 +1,40 @@
 import React, { useEffect, useState } from 'react'
-import { View, ScrollView, Text, StyleSheet, FlatList, Image, Button, Alert, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, ScrollView, Text, StyleSheet, FlatList, Image, Alert, TouchableOpacity, ActivityIndicator } from 'react-native';
 import CarouselComponent from '../components/CarouselComponent';
 import Entypo from '@expo/vector-icons/Entypo';
 import { useCart } from '../context/CartContext'
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 //22520767 Nguyễn Cương Lĩnh
 
 const HomeScreen = ({ navigation }) => {
     const [products, setProducts] = useState([]);
     const [jewelery, setJewelery] = useState([]);
     const { addToCart, cart, firstCart } = useCart();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         // Fetch all products
-        fetch('https://fakestoreapi.com/products')
+        const fetchProducts = fetch('https://fakestoreapi.com/products')
             .then(res => res.json())
-            .then(data => setProducts(data))
+            .then(data => setProducts(data));
         // Fetch jewelery
-        fetch('https://fakestoreapi.com/products/category/jewelery')
+        const fetchJewelery = fetch('https://fakestoreapi.com/products/category/jewelery')
             .then(res => res.json())
-            .then(data => setJewelery(data))
+            .then(data => setJewelery(data));
+
+        Promise.all([fetchProducts, fetchJewelery])
+            .finally(() => setLoading(false));
     }, []);
 
     const handleAddToCart = (item) => {
         const isInCart = cart.some(cartItem => cartItem.id === item.id);
-    
+
         if (isInCart) {
             Alert.alert('Message', `This product is already in your cart.`);
             return;
         }
-    
+
         addToCart({
             id: item.id,
             title: item.title,
@@ -66,11 +71,27 @@ const HomeScreen = ({ navigation }) => {
         </View>
     )
 
+    if (loading) {
+        return (
+            <View style={styles.loaderContainer}>
+                <ActivityIndicator size="large" color="#24A0ED" />
+            </View>
+        );
+    }
+
     return (
         <ScrollView style={styles.body}>
             <View style={styles.container}>
+                <Text style={styles.title} >
+                    Submit and embrace to consumerism
+                </Text>
                 <CarouselComponent />
-                <Text>Hot Deal</Text>
+                <View style={styles.headerContainer}>
+                    <Text style={styles.header}>
+                        Hot Deal
+                    </Text>
+                    <FontAwesome5 name="fire" size={24} color="red" style={styles.icon} />
+                </View>
                 <View style={styles.productList}>
                     <FlatList
                         data={products}
@@ -80,7 +101,12 @@ const HomeScreen = ({ navigation }) => {
                         renderItem={renderItem}
                     />
                 </View>
-                <Text>New Arrivals</Text>
+                <View style={styles.headerContainer}>
+                    <Text style={styles.header}>
+                        New Arrivals
+                        <MaterialCommunityIcons name="medal" size={24} color="gold" style={styles.icon} />
+                    </Text>
+                </View>
                 <View style={styles.productList}>
                     <FlatList
                         data={jewelery}
@@ -98,18 +124,34 @@ const styles = StyleSheet.create({
     body: {
         backgroundColor: '#F2F4F7',
         flex: 1,
-
     },
     container: {
         flex: 1,
         flexDirection: 'column',
         backgroundColor: '#F2F4F7',
         marginHorizontal: 20,
-        alignItems: 'center',
-
     },
     title: {
-        textAlign: 'center'
+        textAlign: 'center',
+        color: 'red',
+        fontWeight: 'bold',
+        fontSize: 22,
+        fontStyle: 'italic',
+    },
+    header: {
+        textAlign: 'left',
+        color: 'red',
+        fontWeight: 'bold',
+        fontSize: 24,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    icon: {
+        marginLeft: 10,
     },
     image: {
         width: 180,
