@@ -1,20 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import PlacesStack from './stacks/PlacesStack';
+import MediaStack from './stacks/MediaStack';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator screenOptions={() => ({
+        headerShown: false,
+        tabBarActiveTintColor: '#24a0ed',
+        tabBarInactiveTintColor: 'black',
+        tabBarLabelStyle: {
+          fontSize: 20,
+        },
+        tabBarStyle: {
+          height: 66,
+          paddingBottom: 10,
+        },
+      })}>
+        <Tab.Screen name="PlacesStack" component={PlacesStack} options={() => ({
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="place" size={30} color={color} />
+          
+
+          ),
+          title: 'Places',
+          
+        })} />
+        <Tab.Screen name="MediaStack" component={MediaStack} options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="perm-media" size={30} color={color} />
+          ),
+          title: 'Media',
+
+        }
+      }
+        
+        />
+        
+      </Tab.Navigator>
+    </NavigationContainer>
+
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
