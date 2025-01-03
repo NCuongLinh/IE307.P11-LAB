@@ -1,15 +1,13 @@
 import * as SQLite from 'expo-sqlite/legacy';
 
-// Mở cơ sở dữ liệu chung
 const db = SQLite.openDatabase('media_places.db');
 
-// Tạo bảng video và bảng địa điểm nếu chưa có
 const createTable = () => {
   db.transaction(tx => {
-    // Tạo bảng videos
-    //tx.executeSql('DROP TABLE IF EXISTS places;', []);
-    //tx.executeSql('DROP TABLE IF EXISTS videos;', []);
-    // Gọi hàm xóa cơ sở dữ liệu
+
+    // Delete database
+     tx.executeSql('DROP TABLE IF EXISTS places;', []);
+    tx.executeSql('DROP TABLE IF EXISTS videos;', []);
 
     tx.executeSql(
       `CREATE TABLE IF NOT EXISTS videos (
@@ -19,7 +17,6 @@ const createTable = () => {
       );`
     );
     
-    // Tạo bảng places
     tx.executeSql(
       `CREATE TABLE IF NOT EXISTS places (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,9 +31,8 @@ const createTable = () => {
   });
 };
 
-// Lưu video vào cơ sở dữ liệu
 const saveVideoToDB = async (uri, callback) => {
-  const timestamp = Date.now(); // Get current timestamp
+  const timestamp = Date.now(); 
   try {
     await new Promise((resolve, reject) => {
       db.transaction((tx) => {
@@ -49,15 +45,14 @@ const saveVideoToDB = async (uri, callback) => {
       });
     });
     console.log('Video saved:', uri);
-    if (callback) callback(); // Call callback to update UI
+    if (callback) callback(); 
   } catch (error) {
     console.error('Error saving video:', error);
   }
 };
 
-// Lưu địa điểm vào cơ sở dữ liệu
 export const savePlace = async (title, locationName, imageUri, latitude, longitude) => {
-  const timestamp = Date.now(); // Lấy thời gian hiện tại
+  const timestamp = Date.now(); 
   try {
     await new Promise((resolve, reject) => {
       db.transaction((tx) => {
@@ -75,13 +70,12 @@ export const savePlace = async (title, locationName, imageUri, latitude, longitu
   }
 };
 
-// Lấy tất cả video từ cơ sở dữ liệu
 export const getAllVideos = async (callback) => {
   try {
     const videos = await new Promise((resolve, reject) => {
       db.transaction((tx) => {
         tx.executeSql(
-          'SELECT * FROM videos ORDER BY timestamp DESC;', // Sắp xếp theo timestamp
+          'SELECT * FROM videos ORDER BY timestamp DESC;', 
           [],
           (_, { rows }) => {
             resolve(rows._array);
@@ -98,19 +92,18 @@ export const getAllVideos = async (callback) => {
   }
 };
 
-// Lấy tất cả địa điểm từ cơ sở dữ liệu
 export const getPlaces = async () => {
   try {
     const result = await new Promise((resolve, reject) => {
       db.transaction((tx) => {
         tx.executeSql(
-          'SELECT * FROM places ORDER BY timestamp DESC;', // Sắp xếp theo timestamp
+          'SELECT * FROM places ORDER BY timestamp DESC;', 
           [],
           (_, { rows }) => {
-            resolve(rows._array); // Trả về tất cả các địa điểm
+            resolve(rows._array); 
           },
           (_, error) => {
-            reject(error); // Nếu có lỗi
+            reject(error); 
           }
         );
       });
@@ -121,17 +114,16 @@ export const getPlaces = async () => {
   }
 };
 
-// Hàm gọi để lấy tất cả các địa điểm và video đã lưu
 export const getMediaData = (callback) => {
   getAllVideos((videoData) => {
     getPlaces().then((placeData) => {
-      callback(videoData, placeData); // Truyền cả video và địa điểm vào callback
+      callback(videoData, placeData); 
     });
   });
 };
 
 
 
-createTable(); // Đảm bảo bảng được tạo khi ứng dụng chạy
+createTable(); 
 
 export { saveVideoToDB };

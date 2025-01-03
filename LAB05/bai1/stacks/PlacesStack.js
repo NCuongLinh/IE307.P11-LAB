@@ -44,18 +44,18 @@ const PlacesStack = () => {
           },
         }}
       />
-            <Stack.Screen
+      <Stack.Screen
         name="Map"
         component={MapScreen}
         options={{
-          title: 'Add a new place',
+          title: 'Map',
           headerTitleStyle: {
             fontWeight: 'bold',
             fontSize: 25,
           },
         }}
       />
-                  <Stack.Screen
+      <Stack.Screen
         name="PlaceDetail"
         component={PlaceDetailScreen}
         options={{

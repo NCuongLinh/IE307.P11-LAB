@@ -6,11 +6,13 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const PlaceDetailScreen = ({ navigation }) => {
   const route = useRoute();
-  const { placeId } = route.params;
+  const { placeId, placeTitle } = route.params;
 
   const [place, setPlace] = useState(null);
   const [isLoading, setIsLoading] = useState(true); // Theo dõi trạng thái tải
 
+  navigation.setOptions({ title: placeTitle });
+  
   useEffect(() => {
     const fetchPlace = async () => {
       try {
@@ -25,7 +27,7 @@ const PlaceDetailScreen = ({ navigation }) => {
       } catch (error) {
         Alert.alert('Error', 'Failed to fetch place data.');
       } finally {
-        setIsLoading(false); // Hoàn tất quá trình tải
+        setIsLoading(false); 
       }
     };
 
@@ -34,7 +36,11 @@ const PlaceDetailScreen = ({ navigation }) => {
 
   const handleViewOnMap = () => {
     if (place) {
-      navigation.navigate('Map', { latitude: place.latitude, longitude: place.longitude });
+      navigation.navigate('Map', {
+        latitude: place.latitude,
+        longitude: place.longitude,
+        isFromPlaceDetail: true,  
+      });
     } else {
       Alert.alert('No location available.');
     }

@@ -15,6 +15,11 @@ const PlacesScreen = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
+  const getPlaceById = (id) => {
+    const place = places.find((p) => p.id === id); // Assuming `places` is available in the scope
+    return place;
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -23,7 +28,7 @@ const PlacesScreen = ({ navigation }) => {
             <TouchableOpacity
             style={styles.itemContainer}
               onPress={() =>
-                navigation.navigate('PlaceDetail', { placeId: place.id }) // Chuyển đến màn hình chi tiết
+                navigation.navigate('PlaceDetail', { placeId: place.id, placeTitle: place.title }) // Chuyển đến màn hình chi tiết
               }
             >
 
