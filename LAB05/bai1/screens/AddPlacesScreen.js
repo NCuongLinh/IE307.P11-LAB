@@ -4,11 +4,12 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
-import { savePlace } from '../database/data';  // Import hàm lưu
+import { savePlace } from '../database/data';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Entypo from '@expo/vector-icons/Entypo';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import * as Notifications from 'expo-notifications';
 
 const AddPlacesScreen = ({ navigation }) => {
   const [image, setImage] = useState(null);
@@ -23,7 +24,7 @@ const AddPlacesScreen = ({ navigation }) => {
       );
       const data = await response.json();
       if (data && data.address) {
-        return data.display_name; // Hoặc một trường khác như `data.address.city`
+        return data.display_name;
       }
       return 'Unknown Location';
     } catch (error) {
@@ -32,7 +33,26 @@ const AddPlacesScreen = ({ navigation }) => {
     }
   };
 
-  // Request camera and library permissions
+  useEffect(() => {
+    Notifications.setNotificationHandler({
+      handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: true,
+      }),
+    });
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Notifications.requestPermissionsAsync();
+      if (status !== 'granted') {
+        Alert.alert('Permission to send notifications was denied');
+      }
+    })();
+  }, []);
+
+
   useEffect(() => {
     (async () => {
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -40,7 +60,6 @@ const AddPlacesScreen = ({ navigation }) => {
     })();
   }, []);
 
-  // Handle picking image from the gallery
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -53,7 +72,6 @@ const AddPlacesScreen = ({ navigation }) => {
     }
   };
 
-  // Handle taking a photo
   const takePhoto = async () => {
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: false,
@@ -65,7 +83,6 @@ const AddPlacesScreen = ({ navigation }) => {
     }
   };
 
-  // Get current location
   const getCurrentLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== 'granted') {
@@ -80,7 +97,6 @@ const AddPlacesScreen = ({ navigation }) => {
     });
   };
 
-  // Navigate to MapScreen to select a location
   const navigateToMap = () => {
     navigation.navigate('Map', {
       setLocation: (newLocation) => setLocation(newLocation),
@@ -91,9 +107,13 @@ const AddPlacesScreen = ({ navigation }) => {
     if (image && location) {
       const locationName = await reverseGeocode(location.latitude, location.longitude);
       savePlace(title, locationName, image, location.latitude, location.longitude);
-      Alert.alert('Place saved!');
-    } else {
-      Alert.alert('Please select an image and location!');
+      Notifications.scheduleNotificationAsync({
+        content: {
+          title: 'Places added successfully',
+          body: "The place has been added to your favourites list!",
+        },
+        trigger: null,
+      });
     }
   };
   return (
@@ -115,7 +135,7 @@ const AddPlacesScreen = ({ navigation }) => {
         <View style={styles.buttonGroup}>
           <TouchableOpacity onPress={pickImage} style={styles.button}>
             <Text style={styles.buttonText}>
-              <Ionicons name="image" size={16} color="#24a0ed"/> Pick Image
+              <Ionicons name="image" size={16} color="#24a0ed" /> Pick Image
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={takePhoto} style={styles.button}>
@@ -196,7 +216,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'black',
-    marginLeft: 8, // Tạo khoảng cách giữa icon và text
+    marginLeft: 8,
   },
   image: {
     width: '100%',
@@ -244,7 +264,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   imageContainer: {
-    marginBottom: 20, 
+    marginBottom: 20,
   },
   mapContainer: {
     marginBottom: 20,

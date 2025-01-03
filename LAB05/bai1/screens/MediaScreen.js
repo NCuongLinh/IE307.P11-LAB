@@ -5,8 +5,10 @@ import { getMediaData, getPlaces } from '../database/data'; // Import hàm lấy
 
 const MediaScreen = ({ navigation }) => {
   const [mediaItems, setMediaItems] = useState([]);
+  const [refreshing, setRefreshing] = useState(false); // Thêm state refreshing
 
-  useEffect(() => {
+  const fetchMediaData = () => {
+    setRefreshing(true); // Bắt đầu tải lại
     getMediaData((videoData, placeData) => {
       const combinedData = [
         ...videoData.map(item => ({ ...item, type: 'video' })),
@@ -14,8 +16,13 @@ const MediaScreen = ({ navigation }) => {
       ];
       const sortedData = combinedData.sort((a, b) => b.timestamp - a.timestamp);
       setMediaItems(sortedData);  // Cập nhật mediaItems sau khi có dữ liệu mới
+      setRefreshing(false); // Kết thúc tải lại
     });
-  }, []); 
+  };
+
+  useEffect(() => {
+    fetchMediaData();  // Lấy dữ liệu khi component mount
+  }, []);
 
   const renderItem = useCallback(({ item }) => {
     if (item.type === 'video') {
@@ -49,10 +56,11 @@ const MediaScreen = ({ navigation }) => {
         <FlatList
           data={mediaItems}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id ? item.id.toString() : index.toString()} // Dùng id làm key
-          numColumns={2} 
+          keyExtractor={(item) => item.id ? item.id.toString() : item.uri.toString()} // Đảm bảo id hoặc uri là duy nhất
+          numColumns={2}
           columnWrapperStyle={styles.columnWrapperStyle}
-          extraData={mediaItems}  // Đảm bảo FlatList biết về sự thay đổi của dữ liệu
+          onRefresh={fetchMediaData}  
+          refreshing={refreshing} 
         />
       </View>
     </View>
