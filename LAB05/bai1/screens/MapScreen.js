@@ -5,7 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
  
 const MapScreen = ({ route, navigation }) => {
   // Get latitude and longitude from route params
-  const { latitude, longitude, isFromPlaceDetail } = route.params;
+  const { latitude, longitude, isFromPlaceDetail, setLocation } = route.params;
 
   const [selectedLocation, setSelectedLocation] = useState({
     latitude: latitude ?? 10.869492315581493,
