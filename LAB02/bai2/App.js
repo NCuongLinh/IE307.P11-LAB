@@ -6,8 +6,6 @@ import SwitchButton from './components/SwitchButton';
 import FeedbackForm from './components/FeedbackForm';
 import FeedbackList from './components/FeedbackList';
 
-//22520767 Nguyễn Cương Lĩnh
-
 export default function App() {
   const [darkModeIsEnabled, setDarkModeIsEnabled] = useState(false);
   const [notificationIsEnabled, setNotificationIsEnabled] = useState(false);

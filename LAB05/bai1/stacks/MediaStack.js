@@ -2,10 +2,9 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import MediaScreen from '../screens/MediaScreen';
 import RecordScreen from '../screens/RecordScreen';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 const Stack = createStackNavigator();
 
 const MediaStack = () => {

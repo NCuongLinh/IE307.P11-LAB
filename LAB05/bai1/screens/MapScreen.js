@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Alert, TouchableOpacity } from 'react-native';
-import MapView, { Callout, Marker } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import Ionicons from '@expo/vector-icons/Ionicons';
-
+ 
 const MapScreen = ({ route, navigation }) => {
   // Get latitude and longitude from route params
-  const { latitude, longitude, isFromPlaceDetail } = route.params;
+  const { latitude, longitude, isFromPlaceDetail, setLocation } = route.params;
 
   const [selectedLocation, setSelectedLocation] = useState({
     latitude: latitude ?? 10.869492315581493,

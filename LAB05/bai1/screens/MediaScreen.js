@@ -1,27 +1,27 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
-import { Video } from 'expo-av'; // Để hiển thị video
-import { getMediaData, getPlaces } from '../database/data'; // Import hàm lấy dữ liệu từ cơ sở dữ liệu
-
+import { Video } from 'expo-av'; 
+import { getMediaData, getPlaces } from '../database/data'; 
+ 
 const MediaScreen = ({ navigation }) => {
   const [mediaItems, setMediaItems] = useState([]);
-  const [refreshing, setRefreshing] = useState(false); // Thêm state refreshing
+  const [refreshing, setRefreshing] = useState(false); 
 
   const fetchMediaData = () => {
-    setRefreshing(true); // Bắt đầu tải lại
+    setRefreshing(true); 
     getMediaData((videoData, placeData) => {
       const combinedData = [
         ...videoData.map(item => ({ ...item, type: 'video' })),
         ...placeData.map(item => ({ ...item, type: 'image' }))
       ];
       const sortedData = combinedData.sort((a, b) => b.timestamp - a.timestamp);
-      setMediaItems(sortedData);  // Cập nhật mediaItems sau khi có dữ liệu mới
-      setRefreshing(false); // Kết thúc tải lại
+      setMediaItems(sortedData);  
+      setRefreshing(false); 
     });
   };
 
   useEffect(() => {
-    fetchMediaData();  // Lấy dữ liệu khi component mount
+    fetchMediaData();  
   }, []);
 
   const renderItem = useCallback(({ item }) => {

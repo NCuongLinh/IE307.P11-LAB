@@ -6,8 +6,7 @@ import MainScreen from '../screens/MainScreen'
 import HomeDetailsScreen from '../screens/HomeDetailsScreen';
 import NotificationDetailsScreen from '../screens/NotificationDetailsScreen';
 
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 const Stack = createStackNavigator();
 
 const NavigationStack = () => {

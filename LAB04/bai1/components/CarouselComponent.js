@@ -3,6 +3,7 @@ import { Dimensions, Text, View, StyleSheet, Image } from 'react-native';
 import { withDecay } from 'react-native-reanimated';
 import Carousel from 'react-native-reanimated-carousel';
 
+ 
 const width = Dimensions.get('window').width;
 
 function CarouselComponent() {

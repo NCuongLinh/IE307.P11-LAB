@@ -7,6 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 import { decode } from "base-64";
 import Feather from '@expo/vector-icons/Feather';
 
+ 
 const ProfileScreen = () => {
     global.atob = decode;
     const { logout, validEmail, validPassword } = useContext(AuthContext);

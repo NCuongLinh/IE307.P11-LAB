@@ -10,7 +10,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Entypo from '@expo/vector-icons/Entypo';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import * as Notifications from 'expo-notifications';
-
+ 
 const AddPlacesScreen = ({ navigation }) => {
   const [image, setImage] = useState(null);
   const [location, setLocation] = useState(null);

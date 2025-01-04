@@ -3,8 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import PlacesStack from './stacks/PlacesStack';
 import MediaStack from './stacks/MediaStack';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-
-
+ 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -26,8 +25,6 @@ export default function App() {
         <Tab.Screen name="PlacesStack" component={PlacesStack} options={() => ({
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="place" size={30} color={color} />
-          
-
           ),
           title: 'Places',
           
@@ -37,14 +34,10 @@ export default function App() {
             <MaterialIcons name="perm-media" size={30} color={color} />
           ),
           title: 'Media',
-
         }
       }
-        
         />
-        
       </Tab.Navigator>
     </NavigationContainer>
-
   );
 }

@@ -1,7 +1,6 @@
 import React, { createContext, useState } from 'react';
 
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {

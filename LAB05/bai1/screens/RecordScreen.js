@@ -7,8 +7,8 @@ import * as AudioPermissions from 'expo-av';
 import * as Notifications from 'expo-notifications';
 import { saveVideoToDB, getAllVideos } from '../database/data';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-
-const RecordScreen = ({ navigation }) => {
+ 
+const RecordScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [audioPermission, setAudioPermission] = useState(null);
   const [isRecording, setIsRecording] = useState(false);

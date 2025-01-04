@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 const FeedbackForm = ({ darkMode, feedback, setFeedback, onSubmit }) => (
     <View style={styles.feedbackContainer}>
         <Text style={darkMode ? styles.feedbackTitleDark : styles.feedbackTitle}>Feedback</Text>

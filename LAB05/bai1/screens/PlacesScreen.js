@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Image, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { getPlaces } from '../database/data';
-
+ 
 const PlacesScreen = ({ navigation }) => {
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
     const fetchPlaces = async () => {
-      const placesData = await getPlaces(); // Lấy dữ liệu từ SQLite
-      setPlaces(placesData); // Cập nhật state
+      const placesData = await getPlaces(); 
+      setPlaces(placesData); 
     };
 
-    const unsubscribe = navigation.addListener('focus', fetchPlaces); // Tải lại khi màn hình được focus
+    const unsubscribe = navigation.addListener('focus', fetchPlaces); 
     return unsubscribe;
   }, [navigation]);
 
   const getPlaceById = (id) => {
-    const place = places.find((p) => p.id === id); // Assuming `places` is available in the scope
+    const place = places.find((p) => p.id === id); 
     return place;
   };
 
@@ -28,7 +28,7 @@ const PlacesScreen = ({ navigation }) => {
             <TouchableOpacity
             style={styles.itemContainer}
               onPress={() =>
-                navigation.navigate('PlaceDetail', { placeId: place.id, placeTitle: place.title }) // Chuyển đến màn hình chi tiết
+                navigation.navigate('PlaceDetail', { placeId: place.id, placeTitle: place.title }) 
               }
             >
 

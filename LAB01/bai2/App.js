@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, ImageBackground, FlatList, SectionList, ScrollV
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { fruits_vegetables, workouts } from './data';
-// 22520767 Nguyễn Cương Lĩnh
+
 export default function App() {
   const [isSelected, setSelected] = useState([]);
   const toggleSelect = (item) => {
@@ -36,8 +36,7 @@ export default function App() {
     </View>
   );
 
-  // 22520767 Nguyễn Cương Lĩnh
-
+  
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -80,7 +79,6 @@ export default function App() {
     </View>
   );
 }
-// 22520767 Nguyễn Cương Lĩnh
 
 const styles = StyleSheet.create({
   container: {
@@ -160,4 +158,3 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
-// 22520767 Nguyễn Cương Lĩnh

@@ -3,7 +3,6 @@ import { ScrollView, Image, StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
 import Feed from './Feed';
 
-// Nguyễn Cương Lĩnh 22520767
 
 export default function App() {
   return (
