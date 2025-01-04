@@ -5,8 +5,8 @@ import Entypo from '@expo/vector-icons/Entypo';
 import { useCart } from '../context/CartContext'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-//22520767 Nguyễn Cương Lĩnh
 
+ 
 const HomeScreen = ({ navigation }) => {
     const [products, setProducts] = useState([]);
     const [jewelery, setJewelery] = useState([]);

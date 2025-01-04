@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, Text, Switch, StyleSheet } from 'react-native';
 
-//22520767 Nguyễn Cương Lĩnh
-
 const SwitchButton = ({ title, isEnabled, toggleSwitch, darkMode }) => (
     <View style={styles.switchContainer}>
         <Text style={darkMode ? styles.switchTitleDark : styles.switchTitle}>{title}</Text>

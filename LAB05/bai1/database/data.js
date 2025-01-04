@@ -1,13 +1,13 @@
 import * as SQLite from 'expo-sqlite/legacy';
-
+ 
 const db = SQLite.openDatabase('media_places.db');
 
 const createTable = () => {
   db.transaction(tx => {
 
     // Delete database
-     tx.executeSql('DROP TABLE IF EXISTS places;', []);
-    tx.executeSql('DROP TABLE IF EXISTS videos;', []);
+    // tx.executeSql('DROP TABLE IF EXISTS places;', []);
+    // tx.executeSql('DROP TABLE IF EXISTS videos;', []);
 
     tx.executeSql(
       `CREATE TABLE IF NOT EXISTS videos (
@@ -16,7 +16,7 @@ const createTable = () => {
         timestamp INTEGER
       );`
     );
-    
+
     tx.executeSql(
       `CREATE TABLE IF NOT EXISTS places (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,8 +31,8 @@ const createTable = () => {
   });
 };
 
-const saveVideoToDB = async (uri, callback) => {
-  const timestamp = Date.now(); 
+export const saveVideoToDB = async (uri, callback) => {
+  const timestamp = Date.now();
   try {
     await new Promise((resolve, reject) => {
       db.transaction((tx) => {
@@ -45,14 +45,14 @@ const saveVideoToDB = async (uri, callback) => {
       });
     });
     console.log('Video saved:', uri);
-    if (callback) callback(); 
+    if (callback) callback();
   } catch (error) {
     console.error('Error saving video:', error);
   }
 };
 
 export const savePlace = async (title, locationName, imageUri, latitude, longitude) => {
-  const timestamp = Date.now(); 
+  const timestamp = Date.now();
   try {
     await new Promise((resolve, reject) => {
       db.transaction((tx) => {
@@ -75,7 +75,7 @@ export const getAllVideos = async (callback) => {
     const videos = await new Promise((resolve, reject) => {
       db.transaction((tx) => {
         tx.executeSql(
-          'SELECT * FROM videos ORDER BY timestamp DESC;', 
+          'SELECT * FROM videos ORDER BY timestamp DESC;',
           [],
           (_, { rows }) => {
             resolve(rows._array);
@@ -97,13 +97,13 @@ export const getPlaces = async () => {
     const result = await new Promise((resolve, reject) => {
       db.transaction((tx) => {
         tx.executeSql(
-          'SELECT * FROM places ORDER BY timestamp DESC;', 
+          'SELECT * FROM places ORDER BY timestamp DESC;',
           [],
           (_, { rows }) => {
-            resolve(rows._array); 
+            resolve(rows._array);
           },
           (_, error) => {
-            reject(error); 
+            reject(error);
           }
         );
       });
@@ -117,13 +117,10 @@ export const getPlaces = async () => {
 export const getMediaData = (callback) => {
   getAllVideos((videoData) => {
     getPlaces().then((placeData) => {
-      callback(videoData, placeData); 
+      callback(videoData, placeData);
     });
   });
 };
 
+createTable();
 
-
-createTable(); 
-
-export { saveVideoToDB };

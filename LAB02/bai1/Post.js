@@ -5,7 +5,6 @@ import { faThumbsUp } from '@fortawesome/free-regular-svg-icons/faThumbsUp'
 import { faComment } from '@fortawesome/free-regular-svg-icons/faComment'
 import { faShareSquare } from '@fortawesome/free-regular-svg-icons/faShareSquare'
 
-// Nguyễn Cương Lĩnh 22520767
 
 const Post = ({ pfp, username, content, image, likes, comments, shares, handleLike, isLike, handleComment, handleShare }) => {
   return (
@@ -43,7 +42,6 @@ const Post = ({ pfp, username, content, image, likes, comments, shares, handleLi
   );
 };
 
-// Nguyễn Cương Lĩnh 22520767
 
 const styles = StyleSheet.create({
   post: {
@@ -121,4 +119,3 @@ const styles = StyleSheet.create({
 
 export default Post;
 
-// Nguyễn Cương Lĩnh 22520767

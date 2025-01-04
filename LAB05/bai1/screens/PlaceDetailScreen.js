@@ -3,13 +3,13 @@ import { View, StyleSheet, Text, Image, TouchableOpacity, Alert } from 'react-na
 import { useRoute } from '@react-navigation/native';
 import { getPlaces } from '../database/data';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-
+ 
 const PlaceDetailScreen = ({ navigation }) => {
   const route = useRoute();
   const { placeId, placeTitle } = route.params;
 
   const [place, setPlace] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); // Theo dõi trạng thái tải
+  const [isLoading, setIsLoading] = useState(true); 
 
   navigation.setOptions({ title: placeTitle });
   

@@ -7,7 +7,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { useIsFocused } from '@react-navigation/native';
 import MapScreen from '../screens/MapScreen';
 import PlaceDetailScreen from '../screens/PlaceDetailScreen';
-
+ 
 const Stack = createStackNavigator();
 
 const PlacesStack = () => {

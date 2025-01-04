@@ -4,8 +4,7 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen'
 import MainScreen from '../screens/MainScreen'
 
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 const Stack = createStackNavigator();
 
 const AuthStack = () => {

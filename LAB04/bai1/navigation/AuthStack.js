@@ -6,8 +6,7 @@ import ProductDetailScreen from '../screens/ProductDetailScreen';
 import Entypo from '@expo/vector-icons/Entypo';
 import EditProfileScreen from '../screens/EditProfileScreen';
 
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 
 const Stack = createStackNavigator();
 

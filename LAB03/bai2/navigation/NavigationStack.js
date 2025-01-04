@@ -6,8 +6,7 @@ import AddNoteScreen from '../screen/AddNoteScreen'
 import { SettingsContext } from '../context/SettingsContext';
 import {useContext} from 'react';
 
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 const Stack = createStackNavigator();
 
 const NavigationStack = () => {

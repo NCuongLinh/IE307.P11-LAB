@@ -3,8 +3,7 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView, Image, 
 import Entypo from '@expo/vector-icons/Entypo';
 import { useCart } from '../context/CartContext'
 
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 const CategoryScreen = ({ navigation }) => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);

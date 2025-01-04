@@ -4,8 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 
 
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 export default function App() {
   return (
     <AuthProvider>

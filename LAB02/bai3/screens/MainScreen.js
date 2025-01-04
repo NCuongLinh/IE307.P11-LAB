@@ -10,8 +10,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Octicons from '@expo/vector-icons/Octicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 const Tab = createBottomTabNavigator();
 
 const MainScreen = () => {

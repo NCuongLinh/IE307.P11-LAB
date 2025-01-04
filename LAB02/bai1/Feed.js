@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ScrollView, Button, View } from 'react-native';
 import Post from './Post';
 
-// Nguyễn Cương Lĩnh 22520767
 
 const Feed = () => {
   const [posts, setPosts] = useState([
@@ -44,8 +43,7 @@ const Feed = () => {
     },
   ]);
 
-  // Nguyễn Cương Lĩnh 22520767
-
+  
   const handleLike = (postId) => {
     const updatedPosts = posts.map((post) => {
       if (post.id === postId) {
@@ -110,4 +108,4 @@ const Feed = () => {
 
 export default Feed;
 
-  // Nguyễn Cương Lĩnh 22520767
+  

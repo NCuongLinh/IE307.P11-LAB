@@ -1,7 +1,6 @@
 import * as SQLite from 'expo-sqlite/legacy';
 
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 const db = SQLite.openDatabase('notes.db');
 
 export const createTable = () => {

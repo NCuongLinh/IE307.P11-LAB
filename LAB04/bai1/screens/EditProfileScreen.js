@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';  
 
+ 
 const EditProfileScreen = ({ route, navigation }) => {
     const { userInfo, setUserInfo } = route.params;  
     const [name, setName] = useState(`${userInfo.name.firstname} ${userInfo.name.lastname}`);

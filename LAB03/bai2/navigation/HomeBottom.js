@@ -6,8 +6,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import {useContext} from 'react';
 import { SettingsContext } from '../context/SettingsContext';
 
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 const Tab = createBottomTabNavigator();
 
 function HomeBottom() {

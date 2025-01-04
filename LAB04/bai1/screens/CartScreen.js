@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Modal, ActivityIndicator } from 'react-native';
 import { useCart } from '../context/CartContext';
 
+ 
 const CartScreen = ({ navigation }) => {
     const { cart, setFetchedCart, updateCartItemQuantity, removeProductFromCart } = useCart();
     const [productDetails, setProductDetails] = useState([]);

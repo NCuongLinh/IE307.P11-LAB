@@ -5,8 +5,7 @@ import HelpScreen from '../screens/HelpsScreen'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Feather from '@expo/vector-icons/Feather';
 
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 const Drawer = createDrawerNavigator();
 
 function HomeDrawer() {

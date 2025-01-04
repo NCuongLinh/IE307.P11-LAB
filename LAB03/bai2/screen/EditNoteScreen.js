@@ -6,8 +6,7 @@ import Octicons from '@expo/vector-icons/Octicons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { SettingsContext } from '../context/SettingsContext';
 
-//22520767 Nguyễn Cương Lĩnh
-
+ 
 export default function EditNoteScreen() {
   const route = useRoute();
   const navigation = useNavigation();
