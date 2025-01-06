@@ -3,11 +3,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import PlacesStack from './stacks/PlacesStack';
 import MediaStack from './stacks/MediaStack';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
- 
+import { View, LogBox } from "react-native";
+
 const Tab = createBottomTabNavigator();
+LogBox.ignoreAllLogs();
 
 export default function App() {
-
+  console.disableYellowBox = true;
   return (
     <NavigationContainer>
       <Tab.Navigator screenOptions={() => ({
